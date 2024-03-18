@@ -19,11 +19,12 @@ Le validazioni e i controlli possiamo farli anche in un secondo momento.
 
 
 
-
+let game = false
 const button =document.querySelector('.btn').addEventListener('click' , function (){
     const numberOfCell = parseInt(document.getElementById('mySelect').value)
     console.log(numberOfCell)
     newGame(numberOfCell);
+    game=true
 })
 
 
@@ -31,29 +32,44 @@ function newGame(numberOfSquares){
     const stContainer =document.querySelector('.st-container');
     stContainer.innerHTML='';
 
+
+    let bombs=[]
+    for(let i=0 ; i<16 ; i++){
+        let randomNum = generateUniqueRandomNumber(1,numberOfSquares,bombs);
+        bombs.push(randomNum);
+        console.log(bombs)
+    }
+
     for(let i=0 ; i<numberOfSquares; i++){
 
     const square =document.createElement('div') ;
-    let bomb=[1,7,8,10,15,23,29,31,35,39,41,48,56,59,61,66,69,72,78,85,89,95,99]
-    let number = generateUniqueRandomNumber(1,numberOfSquares,bomb);
+
     if (numberOfSquares === 81){
-        square.classList.add('box','medium')
-        // bomb=getRndInteger(1,numberOfSquares)
-        // console.log(bomb)
-       
+        square.classList.add('box','medium')      
     }else if(numberOfSquares === 49){
         square.classList.add('box','hard')
     }else{
         square.classList.add('box')
     }
+
     square.addEventListener('click' , function (){
-        if( (i+1) == number){
-            square.classList.add('bgwin')
-        }else if ((i+1) != number){
-            square.classList.add('bglose')
+        let s=0
+      
+        console.log(s)
+        if(game === true){
+            if(bombs.includes(i+1)){
+                square.classList.add('bglose')
+                game=false
+                document.getElementById('conteggi').innerHTML = `Hai perso il tuo punteggio è:${s}`;
+            }else{
+                square.classList.add('bgwin')
+                s++
+                document.getElementById('conteggi').innerHTML = `il tuo punteggio è ${s}`;
+            }
         }
-        console.log(i+1)
+       
     })
+    
 
    const spanContent = document.createElement('span');
    spanContent.append(i + 1);
@@ -64,7 +80,9 @@ function newGame(numberOfSquares){
    
 }
 }
-
+function contatore(){
+	
+}
 
 function getRndInteger(min, max) {
     return Math.floor(Math.random() * (max - min + 1) ) + min;

@@ -44,3 +44,9 @@ body{
     width: calc(100% / 7);
     height: calc(100% / 7);
 }
+
+.margin{
+    margin: 0 auto;
+    width: 650px;
+    text-align: center;
+}
