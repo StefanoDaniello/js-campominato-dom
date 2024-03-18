@@ -1,0 +1,42 @@
+/* reset  */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.st-container{
+    margin: 0 auto;
+    width: 650px;
+    height: 650px;
+}
+
+body{
+    background-color: green;
+}
+
+
+.box{
+    border: 1px solid black;
+    width: calc(100% / 10);
+    height: calc(100% / 10);
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    cursor: pointer;
+}
+
+
+.bgwin{
+    background-color: aqua;
+}
+
+.medium{
+    width: calc(100% / 9);
+    height: calc(100% / 9);
+}
+
+.hard{
+    width: calc(100% / 7);
+    height: calc(100% / 7);
+}
