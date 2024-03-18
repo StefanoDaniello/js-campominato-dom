@@ -34,27 +34,22 @@ function newGame(numberOfSquares){
     for(let i=0 ; i<numberOfSquares; i++){
 
     const square =document.createElement('div') ;
-    let bomb=[];
-    let number;
+    let bomb=[1,7,8,10,15,23,29,31,35,39,41,48,56,59,61,66,69,72,78,85,89,95,99]
+    let number = generateUniqueRandomNumber(1,numberOfSquares,bomb);
     if (numberOfSquares === 81){
         square.classList.add('box','medium')
         // bomb=getRndInteger(1,numberOfSquares)
         // console.log(bomb)
-        bomb=[1,7,8,10,15,23,29,31,35,39,41,48,56,59,61,66,69,72,78,81]
-        number = generateUniqueRandomNumber(1,numberOfSquares,bomb);
+       
     }else if(numberOfSquares === 49){
         square.classList.add('box','hard')
-        bomb=[1,7,8,10,15,23,29,31,35,39,41,48]
-        number = generateUniqueRandomNumber(1,numberOfSquares,bomb);
     }else{
         square.classList.add('box')
-        bomb=[1,7,8,10,15,23,29,31,35,39,41,48,56,59,61,66,69,72,78,85,89,95,99]
-        number = generateUniqueRandomNumber(1,numberOfSquares,bomb);
     }
     square.addEventListener('click' , function (){
-        if( square == number){
+        if( (i+1) == number){
             square.classList.add('bgwin')
-        }else{
+        }else if ((i+1) != number){
             square.classList.add('bglose')
         }
         console.log(i+1)
