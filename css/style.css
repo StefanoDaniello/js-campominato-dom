@@ -31,6 +31,10 @@ body{
     background-color: aqua;
 }
 
+.bglose{
+    background-color: red;
+}
+
 .medium{
     width: calc(100% / 9);
     height: calc(100% / 9);
