@@ -17,14 +17,13 @@ Di cosa ho bisogno per generare i numeri? Proviamo sempre prima con dei console.
 Le validazioni e i controlli possiamo farli anche in un secondo momento.
 */
 
+let game=false
 
-
-let game = false
 const button =document.querySelector('.btn').addEventListener('click' , function (){
+    game=true
     const numberOfCell = parseInt(document.getElementById('mySelect').value)
     console.log(numberOfCell)
     newGame(numberOfCell);
-    game=true
     
 })
 
@@ -67,19 +66,30 @@ function newGame(numberOfSquares){
                 square.classList.add('bglose')
                 game=false
                 square.innerHTML=`<i class="fa-solid fa-bomb"></i>`
-                document.getElementById('conteggi').innerHTML = `Hai perso il tuo punteggio è:${s}`;
+                document.getElementById('conteggi').innerHTML = `Hai perso il tuo punteggio è: ${s}`;
             }else{
                 square.classList.add('bgwin')
                 s++;
                 console.log(s)
                 square.innerHTML=`<i class="fa-solid fa-heart"></i>`
             }
-        }else if (s === MAX_ATTEMPT){
-            game=false
-            document.getElementById('conteggi').innerHTML = `Hai vinto`;
-        }
-       
-    },{once:true});   /*,{once:true}*/
+            if (s === MAX_ATTEMPT){
+                game=false
+                document.getElementById('conteggi').innerHTML = `Hai vinto`;
+            }
+        }else if(game===false){
+            if(bombs.includes(i+1)){
+                square.classList.add('bglose')
+                square.innerHTML=`<i class="fa-solid fa-bomb"></i>`
+            }
+        } 
+    },{once:true});  
+    
+    
+
+
+
+   /*,{once:true}*/
 }
 }
 
