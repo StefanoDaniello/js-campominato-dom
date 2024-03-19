@@ -25,20 +25,23 @@ const button =document.querySelector('.btn').addEventListener('click' , function
     console.log(numberOfCell)
     newGame(numberOfCell);
     game=true
+    
 })
 
 
 function newGame(numberOfSquares){
+    let s=0;
     const stContainer =document.querySelector('.st-container');
     stContainer.innerHTML='';
-
+    const NUM_BOMB=16;
 
     let bombs=[]
-    for(let i=0 ; i<16 ; i++){
+    for(let i=0 ; i<NUM_BOMB ; i++){
         let randomNum = generateUniqueRandomNumber(1,numberOfSquares,bombs);
         bombs.push(randomNum);
         console.log(bombs)
     }
+    console.log(bombs)
 
     for(let i=0 ; i<numberOfSquares; i++){
 
@@ -48,40 +51,36 @@ function newGame(numberOfSquares){
         square.classList.add('box','medium')      
     }else if(numberOfSquares === 49){
         square.classList.add('box','hard')
-    }else{
+    }else{ 
         square.classList.add('box')
     }
-
+   
+    // const spanContent = document.createElement('span');
+    // spanContent.append(i + 1);   
+    // square.appendChild(spanContent);
+    square.innerHTML=` <span class="invisible"></span>`
+    stContainer.appendChild(square);
+    const MAX_ATTEMPT=numberOfSquares-NUM_BOMB;
     square.addEventListener('click' , function (){
-        let s=0
-      
-        console.log(s)
         if(game === true){
             if(bombs.includes(i+1)){
                 square.classList.add('bglose')
                 game=false
+                square.innerHTML=`<i class="fa-solid fa-bomb"></i>`
                 document.getElementById('conteggi').innerHTML = `Hai perso il tuo punteggio è:${s}`;
             }else{
                 square.classList.add('bgwin')
-                s++
-                document.getElementById('conteggi').innerHTML = `il tuo punteggio è ${s}`;
+                s++;
+                console.log(s)
+                square.innerHTML=`<i class="fa-solid fa-heart"></i>`
             }
+        }else if (s === MAX_ATTEMPT){
+            game=false
+            document.getElementById('conteggi').innerHTML = `Hai vinto`;
         }
        
-    })
-    
-
-   const spanContent = document.createElement('span');
-   spanContent.append(i + 1);
-   
-
-   square.appendChild(spanContent);
-   stContainer.appendChild(square);
-   
+    },{once:true});   /*,{once:true}*/
 }
-}
-function contatore(){
-	
 }
 
 function getRndInteger(min, max) {
